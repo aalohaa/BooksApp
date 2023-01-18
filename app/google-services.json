@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "518936511832",
+    "project_id": "daarabook",
+    "storage_bucket": "daarabook.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:518936511832:android:530c0c1cd90eaa5ab6912d",
+        "android_client_info": {
+          "package_name": "com.example.booksapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "518936511832-o2gmr6sio39a2jsc5lg4bovje1pchm3u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXr5ujX7KL3aiaZb9pSHkCIPu7MpC0WzM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "518936511832-o2gmr6sio39a2jsc5lg4bovje1pchm3u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
