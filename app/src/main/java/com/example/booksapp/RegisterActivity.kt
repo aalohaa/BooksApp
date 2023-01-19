@@ -103,7 +103,7 @@ class RegisterActivity : AppCompatActivity() {
 
             }
             .addOnFailureListener { e->
-                //failer creating account
+                //failed creating account
                 progressDialog.dismiss()
                 Toast.makeText(this, "Failed creating account due to ${e.message}", Toast.LENGTH_SHORT).show()
             }
