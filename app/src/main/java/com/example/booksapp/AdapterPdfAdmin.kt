@@ -4,23 +4,30 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.example.booksapp.databinding.RowPdfAdminBinding
 
-class AdapterPdfAdmin :RecyclerView.Adapter<AdapterPdfAdmin.HolderPdfAdmin>{
+class AdapterPdfAdmin :RecyclerView.Adapter<AdapterPdfAdmin.HolderPdfAdmin>, Filterable{
 
     //context
     private var context: Context
     //arraylist to hold pdfs
-    private var pdfArraylist: ArrayList<ModelPdf>
+    public var pdfArraylist: ArrayList<ModelPdf>
+    private var filterList:ArrayList<ModelPdf>
 
     //viewBinding
     private lateinit var binding:RowPdfAdminBinding
+
+    //filter object
+    var filter: FilterPdfAdmin? = null
 
     //constructor
     constructor(context: Context, pdfArraylist: ArrayList<ModelPdf>) : super() {
         this.context = context
         this.pdfArraylist = pdfArraylist
+        this.filterList = pdfArraylist
     }
 
 
@@ -43,13 +50,38 @@ class AdapterPdfAdmin :RecyclerView.Adapter<AdapterPdfAdmin.HolderPdfAdmin>{
         val pdfUrl = model.url
         val timestamp = model.timestamp
         //convert timestamp to dd//MM/yyyy format
+        val formattedDate = MyApplication.formatTimeStamp(timestamp)
 
-        //
+        //set data
+        holder.titleTv.text = title
+        holder.descriptionTv.text = description
+        holder.dateTv.text = formattedDate
+
+        //load further details like category, pdf from url, pdf size
+
+        //load category id
+        MyApplication.loadCategory(categoryId, holder.categoryTv)
+
+        //we don't need page number here, pas null for page number || load pdf thumbnail
+        MyApplication.loadPdfFromUrlSinglePage(pdfUrl, title, holder.pdfView, holder. progressBar, null)
+
+        //load pdf size
+        MyApplication.loadPdfSize(pdfUrl, title, holder.sizeTv)
+
     }
 
     override fun getItemCount(): Int {
         return pdfArraylist.size //items count
     }
+
+    override fun getFilter(): Filter {
+        if(filter == null){
+            filter = FilterPdfAdmin(filterList, this)
+        }
+
+        return filter as FilterPdfAdmin
+    }
+
 
     /* View holder class for row_pdf_admin.xml*/
     inner class HolderPdfAdmin(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -63,4 +95,5 @@ class AdapterPdfAdmin :RecyclerView.Adapter<AdapterPdfAdmin.HolderPdfAdmin>{
         val dateTv = binding.dateTv
         val moreBtn = binding.moreBtn
     }
+
 }
