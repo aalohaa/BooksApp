@@ -11,6 +11,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
+
 class PdfListAdminActivity : AppCompatActivity() {
 
     //view binding
@@ -65,6 +66,11 @@ class PdfListAdminActivity : AppCompatActivity() {
 
             }
         })
+
+        //handle click, go back
+        binding.backBtn.setOnClickListener {
+            onBackPressed()
+        }
 
     }
 
